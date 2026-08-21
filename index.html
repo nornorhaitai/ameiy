@@ -4,100 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我的戀人</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300&family=Zen+Maru+Gothic:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300&display=swap" rel="stylesheet">
 <style>
-  html{ background:#F8F5EB; }
-  body{ margin:0; background:transparent; color:#1A1A1A; font-family:"Newsreader", serif; overflow-x:hidden; }
-
-  /* VIDEO ONLY BACKGROUND */
-  .video-bg{
-    position:fixed; inset:0; z-index:-2;
-    pointer-events:none; background:#F8F5EB;
-  }
-  .video-bg video{
-    width:100%; height:100%; object-fit:cover;
-    opacity:0; transition: opacity 2s ease;
-  }
-  .video-bg video.is-ready{ opacity:0.55; }
-
-  .washi-overlay, .warm-wash{
-    position:fixed; inset:0; z-index:-1; pointer-events:none;
-  }
-  .washi-overlay{
-    background-color:rgba(248,245,235,0.28);
-    background-image:url(https://www.transparenttextures.com/patterns/rice-paper-3.png);
-    opacity:0.72;
-  }
-  .warm-wash{
-    background: radial-gradient(ellipse at 30% 20%, rgba(255,248,220,0.5) 0%, transparent 65%),
-                radial-gradient(ellipse at 80% 70%, rgba(255,230,200,0.35) 0%, transparent 60%);
-    opacity:0.6;
-  }
-
-  /* FLOWERS - 12 BIG */
-  .flowers{ position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
-  .flower{ position:absolute; top:-20%; height:auto; opacity:0.9; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08)); }
-  .f1{ left:3%; width:72px; animation: fallA 8s linear infinite; }
-  .f2{ left:12%; width:88px; animation: fallB 10s linear infinite 0.8s; }
-  .f3{ left:21%; width:64px; animation: fallA 9s linear infinite 1.5s; }
-  .f4{ left:31%; width:95px; animation: fallB 11s linear infinite 0.3s; }
-  .f5{ left:42%; width:70px; animation: fallA 8.5s linear infinite 2s; }
-  .f6{ left:52%; width:82px; animation: fallB 9.5s linear infinite 1.2s; }
-  .f7{ left:63%; width:68px; animation: fallA 10.5s linear infinite 3s; }
-  .f8{ left:74%; width:90px; animation: fallB 8s linear infinite 2.8s; }
-  .f9{ left:85%; width:66px; animation: fallA 9s linear infinite 0.5s; }
-  .f10{ left:92%; width:78px; animation: fallB 11.5s linear infinite 4s; }
-  .f11{ left:18%; width:60px; animation: fallA 12s linear infinite 4.5s; }
-  .f12{ left:58%; width:100px; animation: fallB 10s linear infinite 5s; }
-  @keyframes fallA{
-    0%{ transform: translate3d(0,-20vh,0) rotate(0deg) scale(0.9); opacity:0; }
-    15%{ opacity:0.9; } 50%{ transform: translate3d(35px,50vh,0) rotate(100deg) scale(1.1); }
-    85%{ opacity:0.9; } 100%{ transform: translate3d(-15px,120vh,0) rotate(200deg) scale(1); opacity:0; }
-  }
-  @keyframes fallB{
-    0%{ transform: translate3d(0,-20vh,0) rotate(0deg) scale(1); opacity:0; }
-    15%{ opacity:0.9; } 50%{ transform: translate3d(-40px,55vh,0) rotate(-90deg) scale(1.15); }
-    85%{ opacity:0.9; } 100%{ transform: translate3d(20px,120vh,0) rotate(-180deg) scale(0.95); opacity:0; }
-  }
-
-  /* CONTENT */
-  header{ position:relative; z-index:2; text-align:center; padding:64px 20px 24px; }
-  header h1{ font-weight:300; letter-spacing:0.15em; margin:0; font-size:22px; }
-  .wrap{ position:relative; z-index:2; max-width:800px; margin:0 auto; padding:20px; text-align:center; }
-
-  /* ENVELOPE - FIXED SIZE NO JUMP */
-  .envelope-wrap{ margin:40px auto; width:100%; max-width:380px; }
-  .envelope{
-    position:relative; width:100%; aspect-ratio: 1.6 / 1;
-    background:#FFFEFB; border-radius:4px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.05);
-    cursor:pointer; transform-style:preserve-3d; transition: transform 0.6s ease;
-  }
-  .envelope:hover{ transform: translateY(-4px); }
-  .envelope-inner{
-    position:absolute; inset:12px;
-    border:1px solid rgba(26,26,26,0.08);
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
-    padding:16px;
-  }
-  .envelope img{ width:100%; height:100%; object-fit:cover; }
-  .card-text{ font-family:"Zen Maru Gothic", sans-serif; font-size:14px; line-height:1.9; letter-spacing:0.04em; }
-  .hint{ margin-top:18px; font-size:12px; letter-spacing:0.12em; opacity:0.5; text-transform:uppercase; }
-
-  footer{ position:relative; z-index:2; text-align:center; padding:40px 20px; opacity:0.4; font-size:11px; letter-spacing:0.1em; }
+  :root{ --line:rgba(0,0,0,0.08); --ink:#1A1A1A; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#F8F5EB; color:var(--ink); font-family:"Newsreader", serif; font-weight:300; overflow-x:hidden; }
+  .video-bg{ position:fixed; inset:0; z-index:0; background:#F8F5EB; }
+  .video-bg video{ width:100%; height:100%; object-fit:cover; opacity:0.72; filter: brightness(1.4) contrast(1.05) saturate(0.85) blur(0.3px); }
+  .washi-overlay{ position:fixed; inset:0; z-index:1; pointer-events:none; background-color:rgba(248,245,235,0.15); background-image:url(https://www.transparenttextures.com/patterns/rice-paper-3.png); opacity:0.35; }
+  .warm-wash{ position:fixed; inset:0; z-index:1; pointer-events:none; background: radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.55) 0%, transparent 70%), rgba(248,245,235,0.1); }
+  .flowers{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
+  .flower{ position:absolute; top:-25%; height:auto; opacity:0.9; }
+  .f1{ left:3%; width:72px; animation: fallA 22s linear infinite; }
+  .f2{ left:12%; width:88px; animation: fallB 26s linear infinite 2s; }
+  .f3{ left:21%; width:64px; animation: fallA 20s linear infinite 4s; }
+  .f4{ left:31%; width:95px; animation: fallB 24s linear infinite 1s; }
+  .f5{ left:42%; width:70px; animation: fallA 23s linear infinite 6s; }
+  .f6{ left:52%; width:82px; animation: fallB 21s linear infinite 3s; }
+  .f7{ left:63%; width:68px; animation: fallA 25s linear infinite 8s; }
+  .f8{ left:74%; width:90px; animation: fallB 22s linear infinite 5s; }
+  .f9{ left:85%; width:66px; animation: fallA 24s linear infinite 2.5s; }
+  .f10{ left:92%; width:78px; animation: fallB 26s linear infinite 10s; }
+  .f11{ left:18%; width:60px; animation: fallA 28s linear infinite 7s; }
+  .f12{ left:58%; width:100px; animation: fallB 23s linear infinite 9s; }
+  @keyframes fallA{ 0%{ transform:translate3d(0,-25vh,0) rotate(0deg) scale(0.9); opacity:0; } 10%{ opacity:0.9; } 50%{ transform:translate3d(25px,45vh,0) rotate(60deg) scale(1.05); } 90%{ opacity:0.9; } 100%{ transform:translate3d(-10px,115vh,0) rotate(120deg) scale(1); opacity:0; } }
+  @keyframes fallB{ 0%{ transform:translate3d(0,-25vh,0) rotate(0deg) scale(1); opacity:0; } 10%{ opacity:0.9; } 50%{ transform:translate3d(-30px,50vh,0) rotate(-50deg) scale(1.1); } 90%{ opacity:0.9; } 100%{ transform:translate3d(15px,115vh,0) rotate(-110deg) scale(0.95); opacity:0; } }
+  header{ position:relative; z-index:2; padding:22px 28px; border-bottom:1px solid var(--line); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.45; }
+  .wrap{ position:relative; z-index:2; max-width:860px; margin:0 auto; padding:0 28px; }
+  h1{ margin:80px 0 40px; line-height:0.9; } h1 img{ height:272px; width:auto; display:block; }
+  .flip-card{ width:100%; perspective:1200px; margin-bottom:28px; cursor:pointer; }
+  .flip-inner{ position:relative; width:100%; transition: transform 0.9s cubic-bezier(0.4,0,0.2,1); transform-style:preserve-3d; }
+  .flip-card.flipped .flip-inner{ transform:rotateY(180deg); }
+  .flip-front,.flip-back{ width:100%; backface-visibility:hidden; background:rgba(255,253,248,0.78); backdrop-filter:blur(16px); border:1px solid rgba(0,0,0,0.05); padding:16px; box-shadow:0 25px 60px rgba(139,115,85,0.15); }
+  .flip-front{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 16px 60px; }
+  .flip-back{ position:absolute; top:0; left:0; transform:rotateY(180deg); }
+  .flip-back img{ width:100%; display:block; }
+  .meta{ display:flex; justify-content:space-between; padding-top:14px; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.4; }
+  .heart{ animation: float 3s ease-in-out infinite; transition:0.5s; } .heart img{ width:62px; } .heart.hidden{ transform:scale(1.6); opacity:0; }
+  @keyframes float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+  .tap{ font-style:italic; font-size:15px; opacity:0.5; margin-top:20px; }
+  footer{ position:relative; z-index:2; margin:90px 0 60px; opacity:0.3; font-size:13px; }
+  @media(max-width:600px){ h1 img{ height:180px; } }
 </style>
 </head>
 <body>
-
-<div class="video-bg">
-  <video id="bgVideo" autoplay muted loop playsinline preload="auto">
-    <source src="your-light-video.mp4" type="video/mp4">
-  </video>
-</div>
+<div class="video-bg"><video autoplay muted loop playsinline preload="auto"><source src="your-light-video.mp4" type="video/mp4"></video></div>
 <div class="washi-overlay"></div>
 <div class="warm-wash"></div>
-
 <div class="flowers">
   <img src="flower1.png" class="flower f1">
   <img src="flower2.png" class="flower f2">
@@ -112,41 +65,20 @@
   <img src="flower1.png" class="flower f11">
   <img src="flower2.png" class="flower f12">
 </div>
-
-<header><h1>我的戀人</h1></header>
-
+<header>ameiy — 2025</header>
 <div class="wrap">
-  <div class="envelope-wrap">
-    <div class="envelope" id="card">
-      <div class="envelope-inner" id="cardInner">
-        <img src="formylover.png" alt="for my lover" style="max-width:220px; height:auto;">
-      </div>
-    </div>
-    <div class="hint">click to open</div>
-  </div>
+<h1><img src="formylover.png" alt="戀人"></h1>
+<div class="flip-card" id="flipCard"><div class="flip-inner">
+<div class="flip-front"><div class="heart" id="heart"><img src="heart1.png"></div><div class="tap">tap my heart ♡</div></div>
+<div class="flip-back"><img src="tempelhof-full.jpg"><div class="meta"><span>Tempelhof Feld, Berlin</span><span>2025</span></div></div>
+</div></div>
+<footer>© Lai</footer>
 </div>
-
-<footer>Tempelhof · Berlin</footer>
-
+<audio id="bgm" loop><source src="ionlycareaboutyou.mp3" type="audio/mpeg"></audio>
 <script>
-  // video fades in after text
-  const bg = document.getElementById('bgVideo');
-  bg.addEventListener('canplay', () => bg.classList.add('is-ready'));
-  setTimeout(() => bg.classList.add('is-ready'), 1000);
-
-  // card flip - same size
-  const card = document.getElementById('card');
-  const inner = document.getElementById('cardInner');
-  let open = false;
-  card.addEventListener('click', () => {
-    open = !open;
-    if(open){
-      inner.innerHTML = `<div class="card-text">あなたのことが大好きです<br><br>ここに手紙を書いてください<br>ずっと一緒にいたいです</div>`;
-    } else {
-      inner.innerHTML = `<img src="formylover.png" alt="for my lover" style="max-width:220px; height:auto;">`;
-    }
-  });
+  const audio=document.getElementById('bgm'), heart=document.getElementById('heart'), flipCard=document.getElementById('flipCard');
+  let hasPlayed=false;
+  flipCard.onclick=()=>{ if(!hasPlayed){ audio.play().catch(()=>{}); hasPlayed=true; heart.classList.add('hidden'); setTimeout(()=>flipCard.classList.add('flipped'),300); } else { if(flipCard.classList.contains('flipped')){ flipCard.classList.remove('flipped'); setTimeout(()=>heart.classList.remove('hidden'),400); } else { heart.classList.add('hidden'); setTimeout(()=>flipCard.classList.add('flipped'),300); } } }
 </script>
-
 </body>
 </html>
