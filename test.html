@@ -7,9 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}body{margin:0;background:#F8F5EB;color:#1A1A1A;font-family:"Newsreader",serif;overflow-x:hidden;min-height:100vh}
+/* VIDEO - PLAY BUTTON REMOVED 100% */
 .video-bg{position:fixed;left:0;top:0;width:50vw;height:100vh;z-index:0;background:#000;overflow:hidden;pointer-events:none}
 .video-bg video{width:100%;height:100%;object-fit:cover;filter:brightness(1.35) contrast(1.05) saturate(1.1);display:block;pointer-events:none}
-.video-bg video::-webkit-media-controls{display:none !important}
+.video-bg video::-webkit-media-controls,
+.video-bg video::-webkit-media-controls-start-playback-button,
+.video-bg video::-webkit-media-controls-overlay-play-button,
+.video-bg video::-webkit-media-controls-enclosure{display:none !important; -webkit-appearance:none !important; opacity:0 !important}
 .video-bg::after{content:"";position:absolute;right:0;top:0;bottom:0;width:120px;background:linear-gradient(to right,transparent,rgba(248,245,235,.9));z-index:1}
 .washi-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background:#F3EFE2 url(https://www.transparenttextures.com/patterns/rice-paper-3.png);opacity:.6}
 .flowers{position:fixed;inset:0;z-index:1;pointer-events:none}
@@ -28,12 +32,16 @@ h1{margin:80px 0 40px}h1 img{height:272px;width:auto;display:block}
 .flip-back{transform:rotateY(180deg);background:url('back.png') center/cover no-repeat}
 .front-content{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(248,245,235,0.15)}
 .tap-hand{width:260px;height:auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15))}
-footer{position:fixed;bottom:20px;left:28px;z-index:5;opacity:.4;font-size:13px}
 @media(max-width:900px){.video-bg{width:100vw;opacity:.6}h1 img{height:180px}.flip-card{height:480px}.tap-hand{width:200px}}
 </style>
 </head>
 <body>
-<div class="video-bg"><video autoplay muted loop playsinline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"><source src="your-light-video.mp4" type="video/mp4"></video></div>
+<!-- VIDEO FIXED - NO PLAY BUTTON -->
+<div class="video-bg">
+  <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
+    <source src="your-light-video.mp4" type="video/mp4">
+  </video>
+</div>
 <div class="washi-overlay"></div>
 <div class="flowers"><img src="flower1.png" class="flower f1"><img src="flower2.png" class="flower f2"><img src="flower1.png" class="flower f3"><img src="flower2.png" class="flower f4"><img src="flower1.png" class="flower f5"><img src="flower2.png" class="flower f6"></div>
 <div class="wrap">
@@ -46,6 +54,15 @@ footer{position:fixed;bottom:20px;left:28px;z-index:5;opacity:.4;font-size:13px}
 </div>
 </label>
 </div>
-<footer>© Lai</footer>
+<script>
+// Force autoplay and hide play button on iOS
+document.addEventListener('DOMContentLoaded', function(){
+  var v = document.getElementById('bgVideo');
+  v.muted = true;
+  v.play().catch(()=>{});
+  // try again after user taps anywhere
+  document.body.addEventListener('touchstart', function(){ v.play().catch(()=>{}); }, {once:true});
+});
+</script>
 </body>
 </html>
