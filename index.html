@@ -8,40 +8,35 @@
 <style>
   :root{ --bg:#F6F3EB; --ink:#1A1A1A; --line:rgba(0,0,0,0.08); }
   *{ box-sizing:border-box; }
-  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"Newsreader", serif; font-weight:300; }
-  header{ display:flex; justify-content:space-between; padding: 22px 28px; border-bottom:1px solid var(--line); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"Newsreader", serif; font-weight:300; -webkit-font-smoothing: antialiased; }
+  header{ display:flex; justify-content:space-between; align-items:center; padding: 22px 28px; border-bottom:1px solid var(--line); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; }
   header span{ opacity:0.5; }
   .wrap{ max-width: 860px; margin: 0 auto; padding: 0 28px; }
-  h1{ font-weight:300; font-style:italic; font-size: 64px; margin: 80px 0 16px 0; }
-  .sub{ max-width: 360px; font-size:17px; opacity:0.55; margin-bottom: 60px; }
-  .art{ background: white; border: 1px solid var(--line); padding: 16px; }
-  .art img{ display:block; width:100%; }
+  h1{ font-weight:300; font-style:italic; font-size: 64px; line-height:0.9; margin: 80px 0 16px 0; letter-spacing:-0.02em; }
+  .sub{ max-width: 360px; font-size:17px; line-height:1.5; opacity:0.55; margin-bottom: 60px; }
+  .art{ background: white; border: 1px solid var(--line); padding: 16px; box-shadow: 0 1px 0 var(--line), 0 20px 50px rgba(0,0,0,0.07); }
+  .art img{ display:block; width:100%; height:auto; }
   .meta{ display:flex; justify-content:space-between; padding-top:14px; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.4; }
-  .music{ margin-top: 28px; background: white; border: 1px solid var(--line); padding: 16px 18px; display:flex; justify-content:space-between; align-items:center; gap:16px; }
-  .music-label{ font-size:11px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.4; }
-  .music-title{ font-style:italic; font-size:16px; }
-  audio{ width: 220px; }
+  .music-title{ margin-top:28px; font-style:italic; font-size:14px; opacity:0.5; }
+  footer{ margin: 90px 0 60px 0; opacity:0.3; font-size:13px; }
 </style>
 </head>
 <body>
 <header><span>ameiy — 2025</span><span>戀人</span></header>
 <div class="wrap">
   <h1>戀人</h1>
-  <div class="sub">This is my first website. Drawings from Tempelhof field, Berlin.</div>
+  <div class="sub">Tempelhof, Berlin.</div>
   <div class="art">
     <img src="tempelhof-full.jpg" alt="Tempelhof drawing">
     <div class="meta"><span>Tempelhof Feld, Berlin</span><span>2025</span></div>
   </div>
-  <div class="music">
-    <div>
-      <div class="music-label">now playing</div>
-      <div class="music-title">Joanna Wang — I Only Care About You</div>
-    </div>
-    <audio controls loop>
-      <source src="ionlycareaboutyou.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-  <footer style="margin:90px 0 60px 0; opacity:0.3; font-size:13px;">© Lai</footer>
+  <div class="music-title">Joanna Wang — I Only Care About You</div>
+  <footer>© Lai</footer>
 </div>
+
+<audio autoplay loop>
+  <source src="ionlycareaboutyou.mp3" type="audio/mpeg">
+</audio>
+
 </body>
 </html>
