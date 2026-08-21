@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TEST - 我的戀人</title>
+<title>我的戀人</title>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#F8F5EB;color:#1A1A1A;font-family:"Newsreader",serif;font-weight:300;overflow-x:hidden;min-height:100vh}
-
-/* VIDEO - no button */
+*{box-sizing:border-box}body{margin:0;background:#F8F5EB;color:#1A1A1A;font-family:"Newsreader",serif;overflow-x:hidden;min-height:100vh}
+/* VIDEO NO BUTTON */
 .video-bg{position:fixed;left:0;top:0;width:50vw;height:100vh;z-index:0;background:#000;overflow:hidden;pointer-events:none}
 .video-bg video{width:100%;height:100%;object-fit:cover;filter:brightness(1.35) contrast(1.05) saturate(1.1);display:block;pointer-events:none}
 .video-bg video::-webkit-media-controls,.video-bg video::-webkit-media-controls-start-playback-button{display:none !important}
 .video-bg::after{content:"";position:absolute;right:0;top:0;bottom:0;width:120px;background:linear-gradient(to right,transparent,rgba(248,245,235,.9));z-index:1}
-
 .washi-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background:#F3EFE2 url(https://www.transparenttextures.com/patterns/rice-paper-3.png);opacity:.6}
 .warm-wash{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 30% 20%,rgba(255,248,220,.2),transparent 70%);opacity:.5}
 .flowers{position:fixed;inset:0;z-index:1;pointer-events:none}
@@ -21,31 +19,21 @@
 .f1{left:5%;width:68px;animation:fallA 16s linear infinite;opacity:.5}.f2{left:20%;width:82px;animation:fallB 19s linear infinite 2s;opacity:.55}.f3{left:35%;width:60px;animation:fallA 15s linear infinite 4s;opacity:.45}.f4{left:52%;width:90px;animation:fallB 18s linear infinite 1s;opacity:.5}.f5{left:70%;width:66px;animation:fallA 17s linear infinite 6s;opacity:.48}.f6{left:83%;width:78px;animation:fallB 16s linear infinite 3s;opacity:.52}
 @keyframes fallA{0%{transform:translate3d(0,-25vh,0) rotate(0deg);opacity:0}10%{opacity:.5}90%{opacity:.45}100%{transform:translate3d(20px,115vh,0) rotate(120deg);opacity:0}}
 @keyframes fallB{0%{transform:translate3d(0,-25vh,0) rotate(0deg);opacity:0}10%{opacity:.55}90%{opacity:.4}100%{transform:translate3d(-20px,115vh,0) rotate(-110deg);opacity:0}}
-
 .wrap{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:0 28px}
 h1{margin:80px 0 40px}h1 img{height:272px;width:auto;display:block}
-
 #flip{display:none}
 .flip-card{width:100%;height:580px;perspective:1200px;margin-bottom:28px;cursor:pointer;display:block}
 .flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.4,0,.2,1)}
 #flip:checked + .flip-card .flip-inner{transform:rotateY(180deg)}
-
-.flip-front,.flip-back{width:100%;height:100%;backface-visibility:hidden;position:absolute;inset:0;overflow:hidden;background:url('back.png') center/cover no-repeat;box-shadow:0 25px 60px rgba(139,115,85,.25);border-radius:4px}
-.flip-front{transform:rotateY(0deg);z-index:2}
-.flip-back{transform:rotateY(180deg)}
-
-.front-content{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:40px}
-
-/* TAP ME BIGGER */
-.tap-hand{width:260px;height:auto;object-fit:contain;pointer-events:none;opacity:.9;transition:transform .3s}
+.flip-front,.flip-back{width:100%;height:100%;backface-visibility:hidden;position:absolute;inset:0;overflow:hidden;border-radius:4px;box-shadow:0 25px 60px rgba(139,115,85,.25)}
+.flip-front{transform:rotateY(0deg);z-index:2;background:url('front.png') center/cover no-repeat}
+.flip-back{transform:rotateY(180deg);background:url('back.png') center/cover no-repeat}
+.front-content{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;background:rgba(248,245,235,0.15)}
+.tap-hand{width:260px;height:auto;object-fit:contain;opacity:.95;transition:transform .3s;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15))}
 .flip-card:hover .tap-hand{transform:scale(1.05)}
-#flip:checked + .flip-card .tap-hand{transform:scale(.9)}
-
-.overlay-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:32px;pointer-events:none}
-.heart{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:float 3s ease-in-out infinite;filter:drop-shadow(0 4px 10px rgba(0,0,0,.2));z-index:3;transition:.5s}
-.heart img{width:62px}#flip:checked + .flip-card .heart{transform:translate(-50%,-50%) scale(1.6);opacity:0}
+.heart{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:float 3s ease-in-out infinite;z-index:3}
+.heart img{width:62px}
 @keyframes float{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-12px)}}
-
 footer{position:fixed;bottom:20px;left:28px;z-index:5;opacity:.4;font-size:13px}
 @media(max-width:900px){.video-bg{width:100vw;opacity:.6}h1 img{height:180px}.flip-card{height:480px}.tap-hand{width:200px}}
 </style>
@@ -65,13 +53,10 @@ footer{position:fixed;bottom:20px;left:28px;z-index:5;opacity:.4;font-size:13px}
 </div>
 <div class="heart"><img src="heart1.png"></div>
 </div>
-<div class="flip-back">
-<img src="letter.png" class="overlay-img" alt="letter">
-</div>
+<div class="flip-back"></div>
 </div>
 </label>
-<p style="opacity:.4;text-align:center;font-style:italic">TEST - flower removed, tap bigger, no video button</p>
 </div>
-<footer>© Lai - test</footer>
+<footer>© Lai</footer>
 </body>
 </html>
