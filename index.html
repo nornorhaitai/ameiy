@@ -13,21 +13,30 @@
   header span{ opacity:0.5; }
   .wrap{ max-width: 860px; margin: 0 auto; padding: 0 28px; }
   h1{ margin: 80px 0 16px 0; line-height:0.9; }
-  h1 img{ height: 68px; width:auto; display:block; }
+  h1 img{ height: 272px; width:auto; max-width:100%; display:block; }
   .sub{ max-width: 360px; font-size:17px; line-height:1.5; opacity:0.55; margin-bottom: 28px; }
-  .game{ background: white; border: 1px solid var(--line); padding: 24px 16px 16px; box-shadow: 0 1px 0 var(--line), 0 20px 50px rgba(0,0,0,0.07); text-align:center; margin-bottom: 28px; }
-  .game-hint{ font-size:11px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.3; margin-bottom: 20px; }
+
+  /* flip card */
+  .flip-card{ background: transparent; width:100%; perspective: 1200px; margin-bottom:28px; }
+  .flip-inner{ position:relative; width:100%; transition: transform 0.9s cubic-bezier(0.4,0,0.2,1); transform-style: preserve-3d; }
+  .flip-card.flipped .flip-inner{ transform: rotateY(180deg); }
+  .flip-front, .flip-back{ position:relative; width:100%; backface-visibility: hidden; background: white; border: 1px solid var(--line); padding: 16px; box-shadow: 0 1px 0 var(--line), 0 20px 50px rgba(0,0,0,0.07); }
+  .flip-front{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 60px 16px 24px; }
+  .flip-back{ position:absolute; top:0; left:0; transform: rotateY(180deg); }
+  .flip-back img{ display:block; width:100%; height:auto; }
+  .meta{ display:flex; justify-content:space-between; padding-top:14px; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.4; }
+
+  .game-hint{ font-size:11px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.3; margin-bottom: 24px; }
   .heart{ cursor:pointer; display:inline-block; animation: float 3s ease-in-out infinite; }
-  .heart img{ width:58px; height:auto; display:block; }
+  .heart img{ width:62px; height:auto; display:block; }
   @keyframes float{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-12px); } }
-  .letter{ display:none; font-style:italic; font-size:16px; line-height:1.7; opacity:0.7; margin-top:20px; }
+  .letter{ font-style:italic; font-size:16px; line-height:1.7; opacity:0.7; margin-top:20px; }
   .play-btn{ border:1px solid var(--ink); background:transparent; color:var(--ink); font-family:"Newsreader", serif; font-style:italic; font-size:13px; padding:8px 22px; border-radius:999px; cursor:pointer; margin-top:16px; }
   .play-btn:hover{ background:var(--ink); color:white; }
-  .art{ background: white; border: 1px solid var(--line); padding: 16px; box-shadow: 0 1px 0 var(--line), 0 20px 50px rgba(0,0,0,0.07); }
-  .art img{ display:block; width:100%; height:auto; }
-  .meta{ display:flex; justify-content:space-between; padding-top:14px; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; opacity:0.4; }
+
   .music-title{ margin-top:28px; font-style:italic; font-size:14px; opacity:0.5; }
   footer{ margin: 90px 0 60px 0; opacity:0.3; font-size:13px; }
+  @media(max-width:600px){ h1 img{ height: 180px; } }
 </style>
 </head>
 <body>
@@ -36,7 +45,53 @@
   <h1><img src="formylover.png" alt="戀人"></h1>
   <div class="sub">Tempelhof, Berlin.</div>
 
-  <div class="game">
-    <div class="game-hint">my heart — catch it</div>
-    <div class="heart" id="heart"><img src="heart1.png" alt="heart"></div>
-    <div class="letter" id="letter">You caught it.<br><br>I only care about you.<br>— Lai ♡</
+  <div class="flip-card" id="flipCard">
+    <div class="flip-inner">
+      <!-- BACK - heart game -->
+      <div class="flip-front">
+        <div class="game-hint">my heart — catch it</div>
+        <div class="heart" id="heart"><img src="heart1.png" alt="heart"></div>
+        <div class="letter">tap my heart ♡</div>
+        <button class="play-btn" id="playBtn">play for us ♡</button>
+      </div>
+      <!-- FRONT - Tempelhof -->
+      <div class="flip-back" id="tempelhofCard">
+        <img src="tempelhof-full.jpg" alt="Tempelhof drawing">
+        <div class="meta"><span>Tempelhof Feld, Berlin</span><span>2025</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="music-title">Joanna Wang — I Only Care About You</div>
+  <footer>© Lai</footer>
+</div>
+
+<audio id="bgm" loop>
+  <source src="ionlycareaboutyou.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById('bgm');
+  const playBtn = document.getElementById('playBtn');
+  const heart = document.getElementById('heart');
+  const flipCard = document.getElementById('flipCard');
+  let playing = false;
+
+  playBtn.onclick = (e) => {
+    e.stopPropagation();
+    if(!playing){ audio.play().catch(()=>{}); playBtn.textContent='pause'; playing=true; }
+    else{ audio.pause(); playBtn.textContent='play for us ♡'; playing=false; }
+  }
+
+  heart.onclick = () => {
+    audio.play().catch(()=>{});
+    playing = true;
+    playBtn.textContent = 'pause';
+    heart.style.transition = 'all 0.5s ease';
+    heart.style.transform = 'scale(1.6)';
+    heart.style.opacity = '0';
+    setTimeout(()=>{ flipCard.classList.add('flipped'); }, 400);
+  }
+</script>
+</body>
+</html>
