@@ -5,39 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我的戀人</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300&family=Zen+Maru+Gothic:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300&display=swap" rel="stylesheet">
 <style>
   html{ background:#F8F5EB; }
   body{ margin:0; background:transparent; color:#1A1A1A; font-family:"Newsreader", serif; overflow-x:hidden; }
-
-  /* VIDEO ONLY BACKGROUND */
-  .video-bg{
-    position:fixed; inset:0; z-index:-2;
-    pointer-events:none; background:#F8F5EB;
-  }
-  .video-bg video{
-    width:100%; height:100%; object-fit:cover;
-    opacity:0; transition: opacity 2s ease;
-  }
+  .video-bg{ position:fixed; inset:0; z-index:-2; pointer-events:none; background:#F8F5EB; }
+  .video-bg video{ width:100%; height:100%; object-fit:cover; opacity:0; transition: opacity 2s ease; }
   .video-bg video.is-ready{ opacity:0.55; }
-
-  .washi-overlay, .warm-wash{
-    position:fixed; inset:0; z-index:-1; pointer-events:none;
-  }
-  .washi-overlay{
-    background-color:rgba(248,245,235,0.28);
-    background-image:url(https://www.transparenttextures.com/patterns/rice-paper-3.png);
-    opacity:0.72;
-  }
-  .warm-wash{
-    background: radial-gradient(ellipse at 30% 20%, rgba(255,248,220,0.5) 0%, transparent 65%),
-                radial-gradient(ellipse at 80% 70%, rgba(255,230,200,0.35) 0%, transparent 60%);
-    opacity:0.6;
-  }
-
-  /* FLOWERS - 12 BIG */
+  .washi-overlay{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:rgba(248,245,235,0.28); opacity:0.72; }
+  .warm-wash{ position:fixed; inset:0; z-index:-1; pointer-events:none; background: radial-gradient(ellipse at 30% 20%, rgba(255,248,220,0.5) 0%, transparent 65%); opacity:0.6; }
   .flowers{ position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
-  .flower{ position:absolute; top:-20%; height:auto; opacity:0.9; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08)); }
+  .flower{ position:absolute; top:-20%; height:auto; opacity:0.9; }
   .f1{ left:3%; width:72px; animation: fallA 8s linear infinite; }
   .f2{ left:12%; width:88px; animation: fallB 10s linear infinite 0.8s; }
   .f3{ left:21%; width:64px; animation: fallA 9s linear infinite 1.5s; }
@@ -51,10 +29,63 @@
   .f11{ left:18%; width:60px; animation: fallA 12s linear infinite 4.5s; }
   .f12{ left:58%; width:100px; animation: fallB 10s linear infinite 5s; }
   @keyframes fallA{
-    0%{ transform: translate3d(0,-20vh,0) rotate(0deg) scale(0.9); opacity:0; }
-    15%{ opacity:0.9; } 50%{ transform: translate3d(35px,50vh,0) rotate(100deg) scale(1.1); }
-    85%{ opacity:0.9; } 100%{ transform: translate3d(-15px,120vh,0) rotate(200deg) scale(1); opacity:0; }
+    0%{ transform:translate3d(0,-20vh,0) rotate(0deg); opacity:0; }
+    15%{ opacity:0.9; }
+    50%{ transform:translate3d(35px,50vh,0) rotate(100deg); }
+    85%{ opacity:0.9; }
+    100%{ transform:translate3d(-15px,120vh,0) rotate(200deg); opacity:0; }
   }
   @keyframes fallB{
-    0%{ transform: translate3d(0,-20vh,0) rotate(0deg) scale(1); opacity:0; }
-    15%{ opacity:0.
+    0%{ transform:translate3d(0,-20vh,0) rotate(0deg); opacity:0; }
+    15%{ opacity:0.9; }
+    50%{ transform:translate3d(-40px,55vh,0) rotate(-90deg); }
+    85%{ opacity:0.9; }
+    100%{ transform:translate3d(20px,120vh,0) rotate(-180deg); opacity:0; }
+  }
+  header{ position:relative; z-index:2; text-align:center; padding:64px 20px 24px; }
+  .wrap{ position:relative; z-index:2; max-width:800px; margin:0 auto; padding:20px; text-align:center; }
+  .envelope-wrap{ margin:40px auto; max-width:380px; }
+  .envelope{ position:relative; width:100%; aspect-ratio:1.6/1; background:#FFFEFB; border-radius:4px; box-shadow:0 8px 32px rgba(0,0,0,0.08); }
+  .envelope-inner{ position:absolute; inset:12px; border:1px solid rgba(0,0,0,0.08); display:flex; justify-content:center; align-items:center; }
+</style>
+</head>
+<body>
+
+<div class="video-bg">
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+    <source src="your-light-video.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="washi-overlay"></div>
+<div class="warm-wash"></div>
+
+<div class="flowers">
+  <img src="flower1.png" class="flower f1">
+  <img src="flower2.png" class="flower f2">
+  <img src="flower1.png" class="flower f3">
+  <img src="flower2.png" class="flower f4">
+  <img src="flower1.png" class="flower f5">
+  <img src="flower2.png" class="flower f6">
+  <img src="flower1.png" class="flower f7">
+  <img src="flower2.png" class="flower f8">
+  <img src="flower1.png" class="flower f9">
+  <img src="flower2.png" class="flower f10">
+  <img src="flower1.png" class="flower f11">
+  <img src="flower2.png" class="flower f12">
+</div>
+
+<header><h1>我的戀人</h1></header>
+<div class="wrap">
+  <div class="envelope-wrap">
+    <div class="envelope"><div class="envelope-inner">for my lover</div></div>
+  </div>
+</div>
+
+<script>
+  const bg = document.getElementById('bgVideo');
+  bg.addEventListener('canplay', () => bg.classList.add('is-ready'));
+  setTimeout(() => bg.classList.add('is-ready'), 1000);
+</script>
+
+</body>
+</html>
