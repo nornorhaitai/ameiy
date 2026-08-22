@@ -2,32 +2,49 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>我的戀人</title>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#F8F5EB;color:#1A1A1A;font-family:"Newsreader",serif;overflow-x:hidden;min-height:100vh}
+*{box-sizing:border-box}
+body{margin:0;background:#F8F5EB;color:#1A1A1A;font-family:"Newsreader",serif;overflow-x:hidden;min-height:100vh}
+
+/* VIDEO - NO PLAY BUTTON */
 .video-bg{position:fixed;left:0;top:0;width:45vw;height:100vh;z-index:0;background:#000;overflow:hidden;pointer-events:none}
 .video-bg video{width:100%;height:100%;object-fit:cover;filter:brightness(1.35) contrast(1.05) saturate(1.1);display:block;pointer-events:none}
-.video-bg video::-webkit-media-controls{display:none !important}
+.video-bg video::-webkit-media-controls,
+.video-bg video::-webkit-media-controls-start-playback-button,
+.video-bg video::-webkit-media-controls-overlay-play-button{display:none !important}
 .video-bg::after{content:"";position:absolute;right:0;top:0;bottom:0;width:100px;background:linear-gradient(to right,transparent,rgba(248,245,235,.9));z-index:1}
+
 .washi-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background:#F3EFE2 url(https://www.transparenttextures.com/patterns/rice-paper-3.png);opacity:.6}
 .flowers{position:fixed;inset:0;z-index:1;pointer-events:none}
 .flower{position:absolute;top:-20%}
 .f1{left:5%;width:68px;animation:fallA 16s linear infinite;opacity:.5}.f2{left:20%;width:82px;animation:fallB 19s linear infinite 2s;opacity:.55}.f3{left:35%;width:60px;animation:fallA 15s linear infinite 4s;opacity:.45}.f4{left:52%;width:90px;animation:fallB 18s linear infinite 1s;opacity:.5}.f5{left:70%;width:66px;animation:fallA 17s linear infinite 6s;opacity:.48}.f6{left:83%;width:78px;animation:fallB 16s linear infinite 3s;opacity:.52}
 @keyframes fallA{0%{transform:translate3d(0,-25vh,0) rotate(0deg);opacity:0}10%{opacity:.5}90%{opacity:.45}100%{transform:translate3d(20px,115vh,0) rotate(120deg);opacity:0}}
 @keyframes fallB{0%{transform:translate3d(0,-25vh,0) rotate(0deg);opacity:0}10%{opacity:.55}90%{opacity:.4}100%{transform:translate3d(-20px,115vh,0) rotate(-110deg);opacity:0}}
+
+/* WRAPPER - RESPONSIVE */
 .wrap{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;align-items:center}
-h1{margin:60px 0 30px;align-self:flex-start}h1 img{height:clamp(140px, 22vw, 272px);width:auto;display:block}
+h1{margin:60px 0 30px;align-self:flex-start}
+h1 img{height:clamp(140px, 22vw, 272px);width:auto;display:block}
+
 #flip{display:none}
-.flip-card{width:min(100%, 760px);aspect-ratio:1.5/1;height:auto;perspective:1200px;cursor:pointer;display:block;margin:0 auto 30px auto}
+.flip-card{width:min(100%, 760px);height:auto;perspective:1200px;cursor:pointer;display:block;margin:0 auto 30px auto}
 .flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.4,0,.2,1)}
 #flip:checked + .flip-card .flip-inner{transform:rotateY(180deg)}
-.flip-front,.flip-back{width:100%;height:100%;backface-visibility:hidden;position:absolute;inset:0;overflow:hidden;border-radius:6px;box-shadow:0 20px 50px rgba(139,115,85,.25)}
-.flip-front{transform:rotateY(0deg);z-index:2;background:url('front.png') center/cover no-repeat}
-.flip-back{transform:rotateY(180deg);background:url('back.png') center/cover no-repeat}
 
-/* tap.png = MUSIC BUTTON */
+/* POSTCARD - FIT EXACTLY NO CUT */
+.flip-front,.flip-back{
+  width:100%;backface-visibility:hidden;position:absolute;inset:0;
+  overflow:hidden;border-radius:6px;box-shadow:0 20px 50px rgba(139,115,85,.25);
+  background:white;display:flex;align-items:center;justify-content:center;
+}
+.flip-front{transform:rotateY(0deg);z-index:2}
+.flip-back{transform:rotateY(180deg)}
+.postcard-img{width:100%;height:100%;object-fit:contain;display:block;background:white}
+
+/* TAP.PNG = BUTTON THAT PLAYS MUSIC */
 .tap-btn{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:200px;height:200px;z-index:10;cursor:pointer;
@@ -36,35 +53,45 @@ h1{margin:60px 0 30px;align-self:flex-start}h1 img{height:clamp(140px, 22vw, 272
 }
 .tap-btn img{width:clamp(160px, 35%, 260px);height:auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.2))}
 @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.05)}}
-@media(max-width:900px){.video-bg{width:100vw;opacity:.55}.video-bg::after{display:none}.wrap{padding:0 16px}h1{margin:30px 0 20px;align-self:center}.flip-card{width:92vw;aspect-ratio:1.35/1;max-width:500px}.tap-btn{width:150px;height:150px}}
+
+@media(max-width:900px){
+  .video-bg{width:100vw;opacity:.55}.video-bg::after{display:none}
+  .wrap{padding:0 16px}h1{margin:30px 0 20px;align-self:center}
+  .flip-card{width:92vw;max-width:500px}
+  .tap-btn{width:150px;height:150px}
+}
 </style>
 </head>
 <body>
 
+<!-- MUSIC - Joanna Wang -->
 <audio id="bgMusic" loop preload="auto">
   <source src="ionlycareaboutyou.mp3" type="audio/mpeg">
 </audio>
 
+<!-- VIDEO BG - NO PLAY BUTTON -->
 <div class="video-bg">
-  <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture>
+  <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
     <source src="your-light-video.mp4" type="video/mp4">
   </video>
 </div>
+
 <div class="washi-overlay"></div>
 <div class="flowers"><img src="flower1.png" class="flower f1"><img src="flower2.png" class="flower f2"><img src="flower1.png" class="flower f3"><img src="flower2.png" class="flower f4"><img src="flower1.png" class="flower f5"><img src="flower2.png" class="flower f6"></div>
 
 <div class="wrap">
   <h1><img src="formylover.png" alt="formylover"></h1>
+  
   <input type="checkbox" id="flip">
-  <label for="flip" class="flip-card">
+  <label for="flip" class="flip-card" id="cardLabel">
     <div class="flip-inner">
       <div class="flip-front">
-        <!-- tap.png BUTTON - plays music -->
-        <div class="tap-btn">
-          <img src="tap.png" alt="tap me">
-        </div>
+        <img src="front.png" class="postcard-img" id="frontImg" alt="front">
+        <div class="tap-btn"><img src="tap.png" alt="tap me"></div>
       </div>
-      <div class="flip-back"></div>
+      <div class="flip-back">
+        <img src="back.png" class="postcard-img" alt="back">
+      </div>
     </div>
   </label>
 </div>
@@ -74,11 +101,24 @@ document.addEventListener('DOMContentLoaded', function(){
   var v=document.getElementById('bgVideo'); 
   var music=document.getElementById('bgMusic');
   var flip=document.getElementById('flip');
+  var frontImg=document.getElementById('frontImg');
+  var cardLabel=document.getElementById('cardLabel');
+  
   v.muted=true; v.play().catch(()=>{});
   
+  // Make card size = exact postcard size, no cut
+  frontImg.onload = function(){
+    var ratio = this.naturalHeight / this.naturalWidth;
+    cardLabel.style.aspectRatio = "1 / " + ratio;
+    cardLabel.style.height = (cardLabel.offsetWidth * ratio) + "px";
+  };
+  if(frontImg.complete) frontImg.onload();
+  window.addEventListener('resize', function(){ if(frontImg.complete) frontImg.onload(); });
+
+  // Tap.png = flip + play music
   flip.addEventListener('change', function(){ 
     music.volume=0.8;
-    music.play().then(()=>{}).catch(()=>{});
+    music.play().catch(()=>{});
   });
   
   document.body.addEventListener('touchstart', function(){ v.play().catch(()=>{}); }, {once:true});
